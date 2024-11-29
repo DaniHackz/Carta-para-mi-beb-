@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para mi Amor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Para mi niña hermosa 💗</h1>
+        <p id="message">Haz clic en el botón para abrir tu cartita bebé 😊</p>
+        <button onclick="openCard()">Abrir Carta</button>
+        <div class="heart"></div>
+
+        <!-- Música de fondo -->
+        <audio id="background-music" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+            Tu navegador no soporta la reproducción de audio.
+        </audio>
+
+        <!-- La carta que se muestra después de hacer clic en el botón -->
+        <div id="card" style="display: none;">
+            <h2>Querida Maricielo ❤️</h2>
+            <p>
+                " Ahora siii mi tontita hermosa, muy buenos días, buenas tardes o buenas noches jajaja si dije todo eso es para que lo vuelvas
+                a leer nuevamente en el momento que sea mañana, tarde o noche... jajaja y así mismo te acuerdes de lo mucho que te amo mi niña hermosa, 
+                te aprecio demasiado, eres una persona muy importante en mi vida, eres mi mayor prioridad, y gracias a ti amor voy cambiando varios defectos
+                míos para así ser una mejor persona y un buen hombre en tu vida, yo sí quiero que esta relación funcione de verdad contigo "Maricielo", porque
+                mi cabeza no para de pensar en ti, a cada rato o cada momento, mi cabeza está ahí preguntando, sobre si desayunaste, almorzaste, cenaste, sobre 
+                qué estás haciendo, sobre cómo estás, sobre cómo vas en tus trabajos, exámenes, estudios, y la verdad yo estaría preguntándote todo el maldito
+                día esos tipos de preguntas, pero a veces no lo llego a hacer por temor o miedo de que pienses de mí, que soy demasiado intenso, jodido o molestoso,
+                por eso a veces suelo esperar un cierto tiempo y de ahí preguntarte amor jajaja, pero eso sí mi amor yo te amo demasiadoooo mi potoncita hermosa,
+                y eso sí mi amor sé que he cometido errores, también he roto la promesa que hicimos y por eso mismo te pido perdón bebé, sé muy bien que te hice 
+                sentir mal, te hice llorar... cosa que a mí me hizo sentir muy mal de verdad, sabiendo muy bien que yo mismo también me prometí no hacerte daño o hacerte llorar, 
+                pero al fin y al cabo también rompí mi propia promesa, espero me llegues a perdonar por tales estupideces que hice y que no pienso volver a repetir esos errores, 
+                por eso te escribo esta cartita de lo mucho que quería expresarme sobre todo lo que siento por ti y por las estupideces que hice, sé muy bien que 
+                no soy el hombre perfecto y que tengo miles de defectos, pero este pequeño hombre que está aprendiendo de lo que es la vida, está completamente 
+                enamorado de ti, está aprendiendo a amar, porque no quiere lastimarte, y perdóname si lo hago y quiero que sepas que mis intenciones contigo son amarte 
+                como nunca nadie te ha amado... Y para terminar mi amor, sé que ya te lo he dicho muchas, muchas y muchas veces, pero no importa hoy vuelvo y te lo repito,
+                tuuuuuuu me encantas, eres mi vida ❤️, mi amor bonito 💕, mi niña hermosa 🌹, futura madre de mis hijos 💗, mi felicidad ✨, tú eres mi todo mi amor ❤️.
+                Y hoy, en el día de las cartas, quiero recordarte lo mucho que te amo y lo feliz que soy a tu lado. 
+                Eres la razón por la que sonrío todos los días. Gracias por ser la persona más increíble en mi vida. 
+                💖 Siempre juntos, siempre felices en las buenas y en las malas. Te amoooo mucho Maricielo ❤️"
+            </p>
+            <p> 
+                "<b>Con amor, Dani 💗</b>" 
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openCard() {
+            const audio = document.getElementById("background-music");
+            // Reproducimos la música
+            audio.play().then(() => {
+                console.log("Música iniciada.");
+            }).catch(error => {
+                console.error("Error al iniciar la música:", error);
+            });
+
+            // Mostramos la carta
+            const card = document.getElementById("card");
+            card.style.display = "block";
+            const message = document.getElementById("message");
+            message.textContent = "Espero que te guste 💕";
+
+            // Desplazamiento lento hacia la carta
+            smoothScrollTo(card);
+        }
+
+        function smoothScrollTo(element) {
+            const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 1000; // Duración del desplazamiento en milisegundos
+            let startTime = null;
+
+            function scrollStep(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const currentPosition = easeInOutQuad(progress, startPosition, distance, duration);
+                window.scrollTo(0, currentPosition);
+
+                if (progress < duration) {
+                    window.requestAnimationFrame(scrollStep);
+                }
+            }
+
+            window.requestAnimationFrame(scrollStep);
+        }
+
+        function easeInOutQuad(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+    </script>
+</body>
+</html>
